@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense & Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <h1>Expense &amp; Budget Visualizer</h1>
+
+    <section class="card balance" aria-live="polite">
+      <p class="muted">Total balance</p>
+      <p id="total" class="amount">Rp0</p>
+    </section>
+
+    <section class="card">
+      <h2>Add transaction</h2>
+      <form id="form" novalidate>
+        <label>Item name<input id="name" type="text" placeholder="e.g. Lunch"></label>
+        <label>Amount (Rp)<input id="amount" type="number" min="0" step="0.01" placeholder="0"></label>
+        <label>Category<select id="category"></select></label>
+        <div id="delCatRow" class="newcat" hidden>
+          <button id="delCat" class="del" type="button"></button>
+        </div>
+        <div id="newCatRow" class="newcat" hidden>
+          <input id="newCat" type="text" maxlength="20" placeholder="New category name" aria-label="New category name">
+          <button id="addCat" class="ghost" type="button">Add</button>
+        </div>
+        <label>Date<input id="date" type="date"></label>
+        <p id="error" class="error" role="alert"></p>
+        <button class="primary" type="submit">Add transaction</button>
+      </form>
+    </section>
+
+    <div class="split">
+      <section class="card">
+        <div class="row">
+          <h2>Transactions</h2>
+          <label class="sort">Sort by
+            <select id="sort">
+              <option value="newest">Newest first</option>
+              <option value="amountDesc">Amount: high to low</option>
+              <option value="amountAsc">Amount: low to high</option>
+              <option value="category">Category: A to Z</option>
+            </select>
+          </label>
+        </div>
+        <ul id="list" class="list"></ul>
+      </section>
+      <section class="card">
+        <h2>Spending by category</h2>
+        <div class="chartbox"><canvas id="chart"></canvas></div>
+        <p id="noChart" class="muted">Add a transaction to see the chart.</p>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>Monthly summary</h2>
+      <ul id="months" class="months"></ul>
+    </section>
+  </main>
+</body>
+</html>
